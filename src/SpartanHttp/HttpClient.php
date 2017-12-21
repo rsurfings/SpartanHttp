@@ -7,7 +7,7 @@ class HttpClient
 
     public $service;
 
-    private $url = 'http://ws.erpflex.local.com/queue';
+    private $url = 'http://ws.erpflex.com.br/queue';
 
     /**
      *
