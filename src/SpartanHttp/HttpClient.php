@@ -34,10 +34,13 @@ class HttpClient
         $code = $response->getStatusCode(); // 200
         $reason = $response->getReasonPhrase(); // OK
         
+        $body = $response->getBody();
+        
         return array(
                 'code' => $code,
                 'reason' => $reason,
-                'response' => $response
+                'response' => $response,
+                'message' => $body
         );
     }
 
