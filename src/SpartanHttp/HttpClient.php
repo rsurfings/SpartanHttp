@@ -25,6 +25,7 @@ class HttpClient
      */
     public function get ($message = [])
     {
+        
         $client = new Client();
         $response = $client->request('GET', $this->url, 
                 [
@@ -40,7 +41,7 @@ class HttpClient
         return array(
                 'code' => $code,
                 'reason' => $reason,
-                'response' => $contents
+                'message' => $contents
         );
     }
 
@@ -51,6 +52,9 @@ class HttpClient
      */
     public function post ($message = [])
     {
+        
+        $message= array_map('utf8_encode', $message);
+        
         $client = new Client();
         $response = $client->request('POST', $this->url, 
                 [
