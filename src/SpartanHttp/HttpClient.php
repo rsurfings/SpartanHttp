@@ -40,7 +40,6 @@ class HttpClient
         return array(
                 'code' => $code,
                 'reason' => $reason,
-                'response' => $response,
                 'message' => $contents
         );
     }
