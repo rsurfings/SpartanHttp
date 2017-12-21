@@ -2,7 +2,7 @@
 namespace SpartanHttp;
 use GuzzleHttp\Client;
 
-class Client
+class HttpClient
 {
 
     public $service;
