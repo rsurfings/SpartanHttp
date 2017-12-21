@@ -40,7 +40,7 @@ class HttpClient
         return array(
                 'code' => $code,
                 'reason' => $reason,
-                'message' => $contents
+                'response' => $contents
         );
     }
 
@@ -59,11 +59,13 @@ class HttpClient
         
         $code = $response->getStatusCode(); // 200
         $reason = $response->getReasonPhrase(); // OK
+        $stream = $response->getBody();
+        $contents = $stream->getContents();
         
         return array(
                 'code' => $code,
                 'reason' => $reason,
-                'response' => $response
+                'response' => $contents
         );
     }
 }
