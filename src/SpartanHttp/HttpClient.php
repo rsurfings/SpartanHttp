@@ -29,7 +29,7 @@ class HttpClient
         $client = new Client();
         $response = $client->request('GET', $this->url, 
                 [
-                        'json' => json_encode($message)
+                        'json' => $message
                 ]);
         
         $code = $response->getStatusCode(); // 200
@@ -58,7 +58,7 @@ class HttpClient
         $client = new Client();
         $response = $client->request('POST', $this->url, 
                 [
-                        'json' => json_encode($message)
+                        'json' => $message
                 ]);
         
         $code = $response->getStatusCode(); // 200
