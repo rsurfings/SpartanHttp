@@ -7,14 +7,23 @@ class Client
 
     public $service;
 
-    private $url = 'http://ws.inovacao.ws.erpflex.com.br';
+    private $url = 'http://ws.inovacao.ws.erpflex.com.br/queue';
 
+    /**
+     *
+     * @param unknown $service            
+     */
     public function __construct ($service)
     {
         $this->service = $service;
     }
 
-    public function get ()
+    /**
+     *
+     * @param array $message            
+     * @return unknown[]
+     */
+    public function get ($message = [])
     {
         $client = new Client();
         $response = $client->request('GET', $this->url, 
@@ -32,7 +41,12 @@ class Client
         );
     }
 
-    public function post ()
+    /**
+     *
+     * @param array $message            
+     * @return unknown[]
+     */
+    public function post ($message = [])
     {
         $client = new Client();
         $response = $client->request('POST', $this->url, 
