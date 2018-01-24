@@ -1,5 +1,6 @@
 <?php
 namespace SpartanHttp;
+
 use GuzzleHttp\Client;
 
 class HttpClient
@@ -11,26 +12,27 @@ class HttpClient
 
     /**
      *
-     * @param unknown $service            
+     * @param unknown $service
      */
-    public function __construct ($service)
+    public function __construct($service)
     {
         $this->service = $service;
     }
 
     /**
      *
-     * @param array $message            
-     * @return unknown[]
+     * @param int $messageId
+     * @return array['code' => $code,
+     *         'reason' => $reason,
+     *         'message' => $contents
+     *         ]
      */
-    public function get ($message = [])
+    public function get($messageId)
     {
-        
         $client = new Client();
-        $response = $client->request('GET', $this->url, 
-                [
-                        'json' => $message
-                ]);
+        $response = $client->request('GET', $this->url, [
+            'json' => ['messageId'=>$messageId]
+        ]);
         
         $code = $response->getStatusCode(); // 200
         $reason = $response->getReasonPhrase(); // OK
@@ -39,27 +41,25 @@ class HttpClient
         $contents = $stream->getContents();
         
         return array(
-                'code' => $code,
-                'reason' => $reason,
-                'message' => $contents
+            'code' => $code,
+            'reason' => $reason,
+            'message' => $contents
         );
     }
 
     /**
      *
-     * @param array $message            
+     * @param array $message
      * @return unknown[]
      */
-    public function post ($message = [])
+    public function post($message = [])
     {
-        
-        $message= array_map('utf8_encode', $message);
+        $message = array_map('utf8_encode', $message);
         
         $client = new Client();
-        $response = $client->request('POST', $this->url, 
-                [
-                        'json' => $message
-                ]);
+        $response = $client->request('POST', $this->url, [
+            'json' => $message
+        ]);
         
         $code = $response->getStatusCode(); // 200
         $reason = $response->getReasonPhrase(); // OK
@@ -67,9 +67,9 @@ class HttpClient
         $contents = $stream->getContents();
         
         return array(
-                'code' => $code,
-                'reason' => $reason,
-                'response' => $contents
+            'code' => $code,
+            'reason' => $reason,
+            'response' => $contents
         );
     }
 }
