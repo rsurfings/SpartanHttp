@@ -54,7 +54,10 @@ class HttpClient
     /**
      *
      * @param array $message
-     * @return unknown[]
+     * @return array['code' => $code,
+     *         'reason' => $reason,
+     *         'message' => $contents
+     *         ]
      */
     public function post($message = [])
     {
