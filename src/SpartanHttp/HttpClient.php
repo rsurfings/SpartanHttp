@@ -8,15 +8,17 @@ class HttpClient
 
     public $service;
 
-    private $url = 'http://queue.erpflex.com.br/queue';
+    private $url;
 
     /**
      *
-     * @param unknown $service
+     * @param boolean $service
+     * @param string $url
      */
-    public function __construct($service)
+    public function __construct($config = [$service => false, $url => 'http://queue.erpflex.com.br/queue'])
     {
-        $this->service = $service;
+        $this->service = $config['service'];
+        $this->url = $config['url'];
     }
 
     /**
@@ -31,7 +33,9 @@ class HttpClient
     {
         $client = new Client();
         $response = $client->request('GET', $this->url, [
-            'json' => ['messageId'=>$messageId]
+            'json' => [
+                'messageId' => $messageId
+            ]
         ]);
         
         $code = $response->getStatusCode(); // 200
