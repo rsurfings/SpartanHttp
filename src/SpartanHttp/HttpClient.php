@@ -15,7 +15,7 @@ class HttpClient
      * @param boolean $service
      * @param string $url
      */
-    public function __construct($config = [$service => false, $url => 'http://queue.erpflex.com.br/queue'])
+    public function __construct($config = ["service" => false, "url" => 'http://queue.erpflex.com.br/queue'])
     {
         $this->service = $config['service'];
         $this->url = $config['url'];
