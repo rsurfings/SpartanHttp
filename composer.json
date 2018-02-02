@@ -7,11 +7,13 @@
 	],
 	"require" : {
 		"guzzlehttp/guzzle" : "6.3.0",
-		"monolog/monolog" : "1.23.0"
+		"monolog/monolog" : "1.23.0",
+		"phpunit/phpunit" : "~7.0",
+		"illuminate/database" : "~5.5"
 	},
 	"autoload" : {
 		"psr-4" : {
-			"SpartanHttp\\" : "src/SpartanHttp"
+			"SpartanHttp\\" : "src"
 		}
 	}
 }
