@@ -1,42 +1,36 @@
 <?php
 namespace SpartanHttp;
-
 use GuzzleHttp\Client;
 
 class HttpClient
 {
-
+    
     public $service;
-
-    private $url;
-
+    
+    private $url = 'http://queue.erpflex.com.br/queue';
+    
     /**
      *
-     * @param boolean $service
-     * @param string $url
+     * @param unknown $service
      */
-    public function __construct($config = ["service" => false, "url" => 'http://queue.erpflex.com.br/queue'])
+    public function __construct ($service)
     {
-        $this->service = $config['service'];
-        $this->url = $config['url'];
+        $this->service = $service;
     }
-
+    
     /**
      *
-     * @param int $messageId
-     * @return array['code' => $code,
-     *         'reason' => $reason,
-     *         'message' => $contents
-     *         ]
+     * @param array $message
+     * @return unknown[]
      */
-    public function get($messageId)
+    public function get ($message = [])
     {
+        
         $client = new Client();
-        $response = $client->request('GET', $this->url, [
-            'json' => [
-                'messageId' => $messageId
-            ]
-        ]);
+        $response = $client->request('GET', $this->url,
+            [
+                'json' => $message
+            ]);
         
         $code = $response->getStatusCode(); // 200
         $reason = $response->getReasonPhrase(); // OK
@@ -50,23 +44,22 @@ class HttpClient
             'message' => $contents
         );
     }
-
+    
     /**
      *
      * @param array $message
-     * @return array['code' => $code,
-     *         'reason' => $reason,
-     *         'message' => $contents
-     *         ]
+     * @return unknown[]
      */
-    public function post($message = [])
+    public function post ($message = [])
     {
-        $message = array_map('utf8_encode', $message);
+        
+        // $message= array_map('utf8_encode', $message);
         
         $client = new Client();
-        $response = $client->request('POST', $this->url, [
-            'json' => $message
-        ]);
+        $response = $client->request('POST', $this->url,
+            [
+                'json' => $message
+            ]);
         
         $code = $response->getStatusCode(); // 200
         $reason = $response->getReasonPhrase(); // OK
